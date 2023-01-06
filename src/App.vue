@@ -5,18 +5,18 @@
 </template>
 
 <script>
-import HomeTemplate from './components/templates/HomeTemplate.vue'
+import HomeTemplate from "./components/templates/HomeTemplate.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HomeTemplate
-  }
-}
+    HomeTemplate,
+  },
+};
 </script>
 
 <style lang="scss">
 #app {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 </style>

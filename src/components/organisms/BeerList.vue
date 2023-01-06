@@ -1,21 +1,23 @@
 <template>
-  <el-row :gutter="24">
-    <div style="overflow: auto">
-      <div
-        class="list"
-        v-infinite-scroll="load"
-        infinite-scroll-disabled="disabled"
-      >
-        <div v-for="beer in beers" :key="beer.id">
-          <el-col :span="6">
-            <BeerCard :beer="beer" />
-          </el-col>
+  <div class="beer-list">
+    <el-row :gutter="24">
+      <div style="overflow: auto">
+        <div
+          class="list"
+          v-infinite-scroll="load"
+          infinite-scroll-disabled="disabled"
+        >
+          <div v-for="beer in beers" :key="beer.id">
+            <el-col :span="6">
+              <BeerCard :beer="beer" />
+            </el-col>
+          </div>
         </div>
+        <p v-if="loading">Loading...</p>
+        <p v-if="noMore">No more</p>
       </div>
-      <p v-if="loading">Loading...</p>
-      <p v-if="noMore">No more</p>
-    </div>
-  </el-row>
+    </el-row>
+  </div>
 </template>
 
 <script>
@@ -56,3 +58,21 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.beer-list {
+  margin: auto;
+  @media (min-width: 1920px) {
+    width: 1920px;
+  }
+  @media (min-width: 1200px) and (max-width: 1919px) {
+    width: 1200px;
+  }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    width: 992px;
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    width: 768px;
+  }
+}
+</style>
