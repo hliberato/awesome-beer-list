@@ -1,8 +1,8 @@
 import Punkapi from "./Punkapi/AxiosPunkapi";
-const resource = "/beers?per_page=80";
+const resource = "/beers";
 
 export default {
-  get() {
-    return Punkapi.get(`${resource}`);
+  get(perPage, currentPage) {
+    return Punkapi.get(`${resource}?per_page=${perPage}&page=${currentPage}`);
   },
 };
