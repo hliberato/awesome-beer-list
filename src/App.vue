@@ -1,24 +1,17 @@
 <template>
   <div id="app">
-    <el-container>
-      <el-header>
-        header
-      </el-header>
-      <el-main>
-        main
-      </el-main>
-    </el-container>
+    <HomeTemplate />
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
+import HomeTemplate from './components/templates/HomeTemplate.vue'
 
 export default {
   name: 'app',
-  // components: {
-  //   HelloWorld
-  // }
+  components: {
+    HomeTemplate
+  }
 }
 </script>
 
