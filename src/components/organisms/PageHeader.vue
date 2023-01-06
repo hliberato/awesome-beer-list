@@ -1,6 +1,8 @@
 <template>
   <div class="page-header">
-    <div class="page-header__title">Awesome Beer List</div>
+    <img src="../../assets/logo.png" />
+    <div class="page-header__title">AWESOME BEER LIST</div>
+    <img src="../../assets/logo.png" />
     <div class="page-header__info">About</div>
   </div>
 </template>
@@ -15,10 +17,10 @@ export default {
 .page-header {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 24px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   &__title {
-    color: blue;
+    color: green;
   }
 }
 </style>

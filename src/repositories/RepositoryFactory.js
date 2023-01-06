@@ -1,10 +1,8 @@
-import PostRepository from './PostRepository';
-import UserRepository from './UserRepository';
+import BeersRepository from "./BeersRepository";
 
 const repositories = {
-    'posts': PostRepository,
-    'users': UserRepository
-}
+  beers: BeersRepository,
+};
 export default {
-    get: name => repositories[name]
+  get: (name) => repositories[name],
 };
