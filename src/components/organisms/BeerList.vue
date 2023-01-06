@@ -8,7 +8,7 @@
           infinite-scroll-disabled="disabled"
         >
           <div v-for="beer in beers" :key="beer.id">
-            <el-col :span="6">
+            <el-col :xs="12" :span="6">
               <BeerCard :beer="beer" />
             </el-col>
           </div>
@@ -63,16 +63,16 @@ export default {
 .beer-list {
   margin: auto;
   @media (min-width: 1920px) {
-    width: 1920px;
+    width: 1872px;
   }
   @media (min-width: 1200px) and (max-width: 1919px) {
-    width: 1200px;
+    width: 1152px;
   }
   @media (min-width: 992px) and (max-width: 1199px) {
-    width: 992px;
+    width: 944px;
   }
   @media (min-width: 768px) and (max-width: 991px) {
-    width: 768px;
+    width: 720px;
   }
 }
 </style>
