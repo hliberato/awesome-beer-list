@@ -1,14 +1,18 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from "vue";
+import App from "./App.vue";
 
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-import './plugins/element.js'
+import "element-ui/lib/theme-chalk/index.css";
+import "./plugins/element.js";
+import "./styles/font.scss";
 
-Vue.config.productionTip = false
+import VueScrollTo from "vue-scrollto";
+Vue.use(VueScrollTo);
 
-Vue.use(ElementUI);
+import infiniteScroll from "./directives/InfiniteScroll.js";
+Vue.directive("infinite-scroll", infiniteScroll);
+
+Vue.config.productionTip = false;
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  render: (h) => h(App),
+}).$mount("#app");

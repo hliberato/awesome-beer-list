@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <el-container>
-      <el-header height="auto"> <PageHeader /> </el-header>
+    <el-container class="home-template">
+      <el-header class="home-template__header" height="auto">
+        <PageHeader />
+      </el-header>
       <el-main> <BeerList /> </el-main>
     </el-container>
   </div>
@@ -21,7 +23,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.el-container {
+.home-template {
   position: relative;
   &::before {
     content: "";
@@ -34,13 +36,10 @@ export default {
     z-index: -1;
     background: center/40% url("../../assets/bg.jpg");
   }
-}
-.el-header {
-  padding: 0;
-  z-index: 1;
-  background-color: #f2f2f2;
-}
-.el-main {
-  height: calc(100vh - 68px);
+  &__header {
+    padding: 0;
+    z-index: 1;
+    background-color: #fff;
+  }
 }
 </style>

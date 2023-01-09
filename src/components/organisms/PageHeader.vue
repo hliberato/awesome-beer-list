@@ -1,47 +1,77 @@
 <template>
   <div class="page-header">
-    <div />
-    <div class="page-header__title">
-      <img class="page-header__image" src="../../assets/logo.png" />
-      <div class="page-header__name">AWESOME BEER LIST</div>
-      <img
-        class="page-header__image page-header__image--inverted"
-        src="../../assets/logo.png"
-      />
+    <float-header />
+    <div class="page-header__call">
+      A (not) curated and random collection of beers from all over the world!
+      <img src="../../assets/beer-bg.png" />
+      <a
+        href="#"
+        class="page-header__scroll-down"
+        address="true"
+        v-scroll-to="{ offset: -50, element: '.el-main' }"
+      >
+        <i class="el-icon-caret-bottom"></i>
+      </a>
     </div>
-    <div class="page-header__info">About <i class="el-icon-info" /></div>
   </div>
 </template>
 
 <script>
+import FloatHeader from "../molecules/FloatHeader.vue";
 export default {
   name: "PageHeader",
+  components: { FloatHeader },
 };
 </script>
 
 <style lang="scss" scoped>
 .page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  &__title {
+  height: 100vh;
+  text-align: center;
+  &__call {
+    padding: 0 20vh;
+    padding-top: 100px;
     display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
+    height: 100%;
+    font-size: 3rem;
+    @media (max-width: 768px) {
+      padding: 0 5vh;
+      font-size: 2rem;
+    }
   }
-  &__name {
-    font-family: "Bitter", sans-serif;
-    font-size: 1.4rem;
-    font-weight: 700;
+  &__scroll-down {
     color: green;
+    font-size: 2rem;
+    border: 2px solid green;
+    width: 52px;
+    text-align: center;
+    border-radius: 50%;
+    animation: bounce 2s infinite 2s;
   }
-  &__image {
-    width: 60px;
-    margin: 0 24px;
+}
+
+@keyframes bounce {
+  0%,
+  100%,
+  20%,
+  50%,
+  80% {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
   }
-  &__image--inverted {
-    transform: scaleX(-1);
+  40% {
+    -webkit-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+  60% {
+    -webkit-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
+    transform: translateY(-5px);
   }
 }
 </style>
