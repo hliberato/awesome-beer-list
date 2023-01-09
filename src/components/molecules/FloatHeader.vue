@@ -55,17 +55,17 @@ export default {
   name: "FloatHeader",
   data() {
     return {
-      isScrolling: true,
+      isScrolling: false,
       aboutVisible: false,
     };
   },
-  created() {
+  mounted() {
     this.watchScrrolling();
   },
   methods: {
     watchScrrolling() {
       window.addEventListener("scroll", () => {
-        this.isScrolling = document.documentElement.scrollTop > 20;
+        this.isScrolling = document.documentElement.scrollTop > 80;
       });
     },
   },
