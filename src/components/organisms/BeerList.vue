@@ -1,34 +1,19 @@
 <template>
-  <div
-    class="beer-list"
-    v-infinite-scroll="loadMoreBeers"
-    infinite-scroll-disabled="disabled"
-  >
+  <div class="beer-list" v-infinite-scroll="loadMoreBeers">
     <el-row :gutter="24">
-      <div v-for="beer in beers" :key="beer.id">
+      <div v-for="(beer, index) in beers" :key="beer.id + index">
         <el-col :xs="12" :span="6">
           <BeerCard :beer="beer" />
         </el-col>
       </div>
-      <el-alert
-        v-if="loading"
-        center
-        :closable="false"
-        class="beer-list__alert"
-      >
-        <div slot="title">
-          <i class="el-icon-truck beer-list__alert-icon" />
-          Taking new beers... <i class="el-icon-loading" />
-        </div>
-      </el-alert>
-      <el-alert
-        v-if="noMore"
-        center
-        class="beer-list__alert"
-        title="No more beers :("
-        type="info"
-      />
     </el-row>
+    <div class="beer-list__alert">
+      <span v-if="loading">
+        Taking more beers...
+        <i class="el-icon-truck beer-list__alert-icon" />
+      </span>
+      <span v-if="noMore"> You have reached the end of the list. </span>
+    </div>
   </div>
 </template>
 
@@ -42,7 +27,7 @@ export default {
   data() {
     return {
       beers: [],
-      perPage: 50,
+      perPage: 20,
       currentPage: 1,
       loading: false,
       lastPage: false,
@@ -51,7 +36,7 @@ export default {
   components: {
     BeerCard,
   },
-  created() {
+  mounted() {
     this.getBeers();
   },
   computed: {
@@ -68,6 +53,7 @@ export default {
       this.beers = data;
     },
     loadMoreBeers() {
+      if (this.lastPage) return;
       this.loading = true;
       this.currentPage += 1;
       setTimeout(() => {
@@ -79,38 +65,26 @@ export default {
           .finally(() => {
             this.loading = false;
           });
-      }, 1000);
+      }, 3000);
     },
   },
 };
 </script>
 
 <style lang="scss">
+@import "../../styles/media.scss";
+
 .beer-list {
   margin: auto;
-  @media (min-width: 1920px) {
-    width: 1872px;
-  }
-  @media (min-width: 1200px) and (max-width: 1919px) {
-    width: 1152px;
-  }
-  @media (min-width: 992px) and (max-width: 1199px) {
-    width: 944px;
-  }
-  @media (min-width: 768px) and (max-width: 991px) {
-    width: 720px;
-  }
+  @include media-query;
   &__alert {
-    padding-bottom: 16px;
+    font-size: 2rem;
+    padding: 40px 0;
     text-align: center;
-    .el-alert__title {
-      font-size: 1rem;
-    }
   }
   &__alert-icon {
     display: block;
-    font-size: 3rem;
-    margin-bottom: 16px;
+    font-size: 1.7rem;
     animation: shake 0.5s;
     animation-iteration-count: infinite;
     @keyframes shake {
