@@ -18,7 +18,7 @@
       title="About this page"
       append-to-body
       :visible.sync="aboutVisible"
-      width="30%"
+      width="300px"
     >
       Made with
       <el-link

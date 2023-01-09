@@ -1,5 +1,5 @@
 <template>
-  <div class="beer-list" v-infinite-scroll="loadMoreBeers">
+  <div class="beer-list" v-infinite-scroll="loadBeers">
     <el-row :gutter="24">
       <div v-for="(beer, index) in beers" :key="beer.id + index">
         <el-col :xs="12" :span="6">
@@ -8,11 +8,20 @@
       </div>
     </el-row>
     <div class="beer-list__alert">
-      <span v-if="loading">
-        Taking more beers...
-        <i class="el-icon-truck beer-list__alert-icon" />
+      <span v-if="error">
+        An error occurred trying to fetch beers.
+        <el-link @click="(error = null), loadBeers"
+          >Click here to try again.</el-link
+        >
+        <div class="beer-list__error">Error code: {{ error.message }}.</div>
       </span>
-      <span v-if="noMore"> You have reached the end of the list. </span>
+      <span v-else>
+        <span v-if="loading">
+          Taking more beers...
+          <i class="el-icon-truck beer-list__alert-icon" />
+        </span>
+        <span v-if="noMore"> You have reached the end of the list. </span>
+      </span>
     </div>
   </div>
 </template>
@@ -28,16 +37,17 @@ export default {
     return {
       beers: [],
       perPage: 20,
-      currentPage: 1,
+      currentPage: 0,
       loading: false,
       lastPage: false,
+      error: null,
     };
   },
   components: {
     BeerCard,
   },
   mounted() {
-    this.getBeers();
+    this.loadBeers();
   },
   computed: {
     noMore() {
@@ -48,24 +58,25 @@ export default {
     },
   },
   methods: {
-    getBeers: async function () {
-      const { data } = await BeerRepository.get(this.perPage, this.currentPage);
-      this.beers = data;
-    },
-    loadMoreBeers() {
-      if (this.lastPage) return;
+    loadBeers() {
+      if (this.lastPage || this.error) return;
       this.loading = true;
       this.currentPage += 1;
+      // Simulate slow connection
       setTimeout(() => {
         BeerRepository.get(this.perPage, this.currentPage)
           .then((res) => {
             this.beers = [...this.beers, ...res.data];
             if (res.data.length < 20) this.lastPage = true;
           })
+          .catch((err) => {
+            this.error = err;
+            console.log(err);
+          })
           .finally(() => {
             this.loading = false;
           });
-      }, 3000);
+      }, 1000);
     },
   },
 };
@@ -81,6 +92,15 @@ export default {
     font-size: 2rem;
     padding: 40px 0;
     text-align: center;
+    .el-link {
+      font-size: 2rem;
+      vertical-align: unset;
+    }
+  }
+  &__error {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-top: 16px;
   }
   &__alert-icon {
     display: block;
